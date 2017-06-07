@@ -231,6 +231,52 @@
                \end{itemize}
           \end{description}
       \end{itemize}
+    \item Functions
+      \begin{itemize}
+        \item Are also values in Go and therefore can be passed around like values
+        \item Functions may be \textbf{closures} (function value that references variables from outside its body)
+      \end{itemize}
+  \end{itemize}
+
+\section{Methods}
+  \begin{itemize}
+    \item Go does not have classes but you can define it on a \texttt{type}
+    \item A method \textbf{is a function} with a special \emph{receiver} type
+    \begin{verbatim}
+      func ([receiverName] [receiverType]) [methodName]() [returnType] {
+          return [things]
+      }
+    \end{verbatim}
+    \item Methods can only be declared on \textbf{user-defined types} in the \textbf{same package}
+    \item You can also declare methods with pointer receivers which allows you to modify the original values in a type
+    \item But methods can be declared on the pointer but can be called using the value \emph{or} the pointer
+    \item Reason why you choose pointer receiver
+      \begin{enumerate}
+        \item Method can modify the value that its receiver points to
+        \item Avoid copying the value on each method call
+      \end{enumerate}
+  \end{itemize}
+
+\section{Interfaces}
+  \begin{itemize}
+    \item A set of method signatures (technically a \texttt{type})
+    \item It is basically a type that allows you to call a set of functions
+    \item Declare as:
+    \begin{verbatim}
+      type [varName] interface{
+          [function]()
+      }
+    \end{verbatim}
+    \item A nil value for an interface needs to return gracefully (define this in the function) while having no defined function will throw a \texttt{panic}
+    \item You can control for this with type assertions
+    \begin{verbatim}
+      [varAssigned], [checkVar] := [interfaceValue].([concreteType])
+    \end{verbatim}
+    \item Or in other words
+      \begin{verbatim}
+      t, ok := i.(T)
+      \end{verbatim}
+    \item Can construct an interface with type switches so that a different action is applied depending on the type
   \end{itemize}
 
 \end{document}
